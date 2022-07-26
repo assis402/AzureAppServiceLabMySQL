@@ -1,6 +1,4 @@
 ﻿using AzureSqlApp.Models;
-using Microsoft.Data.SqlClient;
-using Microsoft.FeatureManagement;
 using MySql.Data.MySqlClient;
 
 namespace AzureSqlApp.Services
@@ -8,15 +6,11 @@ namespace AzureSqlApp.Services
     public class ProductService : IProductService
     {
         readonly IConfiguration _configuration;
-        readonly IFeatureManager _featureManager;
 
-        public ProductService(IConfiguration configuration, IFeatureManager featureManager)
+        public ProductService(IConfiguration configuration)
         {
             _configuration = configuration;
-            _featureManager = featureManager;
         }
-
-        public async Task<bool> IsBeta() => await _featureManager.IsEnabledAsync("beta");
 
         MySqlConnection GetConnection()
         {
@@ -25,7 +19,9 @@ namespace AzureSqlApp.Services
             //var connectionString = Environment.GetEnvironmentVariable(key);
             //return new SqlConnection(_configuration.GetConnectionString("DB_CONNECT"));
 
-            return new MySqlConnection(_configuration["DB_CONNECT"]);
+            var connectionString = "Server=mysqlassislab.mysql.database.azure.com; Port=3306; Database=appdb; Uid=assis@mysqlassislab; Pwd=32833113Mt32833113; SslMode=Preferred;";
+
+            return new MySqlConnection(connectionString);
         }
 
         public List<Product> GetProducts()

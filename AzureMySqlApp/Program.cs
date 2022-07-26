@@ -1,21 +1,11 @@
 using AzureSqlApp.Services;
-using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var connectionString = "{app endpoint key}";
-
-builder.Host.ConfigureAppConfiguration(builder =>
-{
-    builder.AddAzureAppConfiguration(options =>
-        options.Connect(connectionString).UseFeatureFlags());
-});
 
 builder.Services.AddScoped<IProductService, ProductService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddFeatureManagement();
 
 var app = builder.Build();
 

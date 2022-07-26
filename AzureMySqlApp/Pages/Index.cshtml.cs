@@ -8,13 +8,11 @@ namespace AzureSqlApp.Pages
     {
         readonly IProductService _productService;
         public List<Product> Products;
-        public bool IsBeta;
 
         public IndexModel(IProductService productService) => _productService = productService;
 
-        public async Task OnGetAsync() 
+        public void OnGetAsync() 
         {
-            IsBeta = await _productService.IsBeta();
             Products = _productService.GetProducts();
         }
     }
