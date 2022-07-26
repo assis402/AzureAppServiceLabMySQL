@@ -19,7 +19,7 @@ namespace AzureSqlApp.Services
             //var connectionString = Environment.GetEnvironmentVariable(key);
             //return new SqlConnection(_configuration.GetConnectionString("DB_CONNECT"));
 
-            var connectionString = "Server=mysqlassislab.mysql.database.azure.com; Port=3306; Database=appdb; Uid=assis@mysqlassislab; Pwd=32833113Mt32833113; SslMode=Preferred;";
+            var connectionString = "";
 
             return new MySqlConnection(connectionString);
         }
